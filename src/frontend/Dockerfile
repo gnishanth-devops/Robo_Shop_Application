@@ -8,9 +8,8 @@ LABEL description="Frontend Application"
 ENV APP_ENV=Development
 
 # remove the default page
-RUN rm -f /etc/nginx/conf.d/default.conf
-
-RUN mkdir -p /tmp/nginx
+RUN rm -f /etc/nginx/conf.d/default.conf && \
+    mkdir -p /tmp/nginx
 
 # Creata a non root user
 # Recommend to run the service with non root user
@@ -24,7 +23,7 @@ RUN addgroup -S appgroup && \
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the source code
-COPY . /usr/share/nginx/html
+COPY ./html-files/ /usr/share/nginx/html
 
 # Set permissions
 RUN chown -R appuser:appgroup \

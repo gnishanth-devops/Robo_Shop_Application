@@ -1,6 +1,9 @@
 # Multi stage build
 FROM node:20-alpine AS dependencies
 
+ENV REDIS_URL=redis://redis:6379
+ENV MONGO_URL=mongodb://mongodb:27017/users
+
 # Set working dir
 WORKDIR /app
 
@@ -11,7 +14,7 @@ COPY package*.json .
 RUN npm ci --omit=dev
 
 # Stage 2 Runtime
-FROM node:22-alpine
+FROM node:20-alpine
 
 ENV NODE_ENV=dev
 

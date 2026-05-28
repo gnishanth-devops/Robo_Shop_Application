@@ -1,0 +1,67 @@
+services:
+  frontend:
+    build:
+      context: ../src/frontend
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  user-service:
+    build:
+      context: ../src/user
+    container_name: user-service
+    ports:
+      - "8081:8080"
+    environment:
+      REDIS_URL: redis://redis:6379
+      MONGO_URL: mongodb://mongodb:27017/users
+      NODE_ENV: production
+    depends_on:
+      - redis
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  redis:
+    build:
+      context: ../src/redis
+    container_name: redis
+    command:
+      [
+        "redis-server",
+        "--bind",
+        "0.0.0.0",
+        "--protected-mode",
+        "no"
+      ]
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  mongodb:
+    build:
+      context: ../src/mongodb
+    container_name: mongodb
+    command: ["mongod", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+volumes:
+  mongo-data:
+
+networks:
+  roboshop:
+    driver: bridge
