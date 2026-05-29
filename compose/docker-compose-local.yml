@@ -43,6 +43,50 @@ services:
     networks:
       - roboshop
 
+  cart-service:
+    build:
+      context: ../src/cart
+    environment:
+      REDIS_HOST: redis
+      CATALOGUE_HOST: catalogue-service
+      CATALOGUE_PORT: 8080
+    depends_on:
+      - redis
+      - catalogue-service
+    networks:
+      - roboshop
+
+  mysql:
+    image: mysql:8.4
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: RoboShop@1
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ../src/db/app-user.sql:/docker-entrypoint-initdb.d/app-user.sql
+      - ../src/db/master-data.sql:/docker-entrypoint-initdb.d/master-data.sql
+    networks:
+      - roboshop
+
+  payment-service:
+    build:
+      context: ../src/payment
+    environment:
+      CART_HOST: cart-service
+      CART_PORT: 8080
+      USER_HOST: user-service
+      USER_PORT: 8080
+      AMQP_HOST: rabbitmq
+      AMQP_USER: roboshop
+      AMQP_PASS: roboshop123
+    depends_on:
+      - cart-service
+      - user-service
+      - rabbitmq
+    networks:
+      - roboshop
+
   redis:
     build:
       context: ../src/redis
@@ -61,6 +105,17 @@ services:
     networks:
       - roboshop
 
+  mysql:
+    image: mysql:8.4
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - roboshop
+
   mongodb:
     build:
       context: ../src/mongodb
@@ -74,8 +129,19 @@ services:
     networks:
       - roboshop
 
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+    restart: unless-stopped
+    networks:
+      - roboshop
+
 volumes:
   mongo-data:
+  mysql-data:
 
 networks:
   roboshop:
