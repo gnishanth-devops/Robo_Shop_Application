@@ -1,16 +1,114 @@
-<!-- search template -->
-<div>
-    <div ng-if="data.searchResults.length == 0">
-        Sorry nothing matches your search
+<!-- Search Results -->
+
+<div class="search-container">
+
+    <div class="page-header">
+
+        <h2>
+            🔍 Search Results
+        </h2>
+
+        <p>
+
+            {{ data.searchResults.length }}
+
+            robots found
+
+        </p>
+
     </div>
-    <div ng-if="data.searchResults.length != 0">
-        <h3>These ecellent candidates match your search</h3>
-        <table>
-            <tr ng-repeat="item in data.searchResults">
-                <td><a class="product" href="/product/{{ item.sku }}">{{ item.name }}</a></td>
-                <td>{{ item.description }}</td>
-                <td>&euro;{{ item.price }}</td>
-            </tr>
-        </table>
+
+    <!-- No Results -->
+
+    <div
+        ng-if="data.searchResults.length == 0"
+        class="search-empty">
+
+        <div class="search-empty-icon">
+
+            🤖
+
+        </div>
+
+        <h3>
+
+            No robots found
+
+        </h3>
+
+        <p>
+
+            Try another keyword or browse categories.
+
+        </p>
+
+        <a
+            href="/"
+            class="shop-now-btn">
+
+            Browse Products
+
+        </a>
+
     </div>
+
+    <!-- Results -->
+
+    <div
+        ng-if="data.searchResults.length != 0">
+
+        <h3 class="search-title">
+
+            Excellent matches for your search
+
+        </h3>
+
+        <div class="search-grid">
+
+            <div
+                class="search-card"
+                ng-repeat="item in data.searchResults">
+
+                <div class="search-card-content">
+
+                    <h3>
+
+                        <a
+                            class="product"
+                            href="/product/{{ item.sku }}">
+
+                            {{ item.name }}
+
+                        </a>
+
+                    </h3>
+
+                    <p class="search-description">
+
+                        {{ item.description }}
+
+                    </p>
+
+                    <div class="search-price">
+
+                        €{{ item.price }}
+
+                    </div>
+
+                    <a
+                        href="/product/{{ item.sku }}"
+                        class="view-product-btn">
+
+                        View Product
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
