@@ -1,10 +1,105 @@
-.autocomplete-suggestions {
-    text-align: left; cursor: default; border: 1px solid #ccc; border-top: 0; background: #fff; box-shadow: -1px 1px 3px rgba(0,0,0,.1);
+=.autocomplete-suggestions {
 
-    /* core styles should not be changed */
-    position: absolute; display: none; z-index: 9999; max-height: 254px; overflow: hidden; overflow-y: auto; box-sizing: border-box;
+    text-align: left;
+    cursor: default;
+
+    border: 1px solid #334155;
+
+    background: #111827;
+
+    color: #e2e8f0;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.45);
+
+    /* Required core styles */
+
+    position: absolute;
+    display: none;
+    z-index: 9999;
+
+    max-height: 300px;
+
+    overflow: hidden;
+    overflow-y: auto;
+
+    box-sizing: border-box;
 }
-.autocomplete-suggestion { position: relative; padding: 0 .6em; line-height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.02em; color: #333; }
-.autocomplete-suggestion b { font-weight: normal; color: #1f8dd6; }
-.autocomplete-suggestion.selected { background: #f0f0f0; }
 
+/* Individual suggestion */
+
+.autocomplete-suggestion {
+
+    position: relative;
+
+    padding: 10px 14px;
+
+    line-height: 24px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    font-size: 1rem;
+
+    color: #cbd5e1;
+
+    transition: all .15s ease;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+}
+
+.autocomplete-suggestion:last-child {
+    border-bottom: none;
+}
+
+/* Highlight matching text */
+
+.autocomplete-suggestion b {
+
+    font-weight: 600;
+
+    color: #06b6d4;
+}
+
+/* Hover */
+
+.autocomplete-suggestion:hover {
+
+    background: #0f3d4a;
+
+    color: #ffffff;
+}
+
+/* Selected item */
+
+.autocomplete-suggestion.selected {
+
+    background: #164e63;
+
+    color: #ffffff;
+}
+
+/* Scrollbar */
+
+.autocomplete-suggestions::-webkit-scrollbar {
+    width: 8px;
+}
+
+.autocomplete-suggestions::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+.autocomplete-suggestions::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 6px;
+}
+
+.autocomplete-suggestions::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4;
+}
