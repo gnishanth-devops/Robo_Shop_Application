@@ -53,6 +53,20 @@ services:
     networks:
       - roboshop
 
+shipping-service:
+  build:
+    context: ../src/shipping
+  container_name: shipping-service
+  environment:
+    CART_ENDPOINT: cart-service:8080
+    DB_HOST: mysql
+  depends_on:
+    - cart-service
+    - mysql
+  restart: unless-stopped
+  networks:
+    - roboshop
+
   payment-service:
     build:
       context: ../src/payment
