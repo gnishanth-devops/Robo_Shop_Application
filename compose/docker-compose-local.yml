@@ -15,7 +15,6 @@ services:
     build:
       context: ../src/user
     container_name: user-service
-    ports: 8081
     environment:
       USER_SERVER_PORT: 8080
       REDIS_URL: redis://redis:6379
@@ -32,7 +31,6 @@ services:
     build:
       context: ../src/catalogue
     container_name: catalogue-service
-    ports: 8082
     environment:
       CATALOGUE_SERVER_PORT: 8080
       MONGO: "true"
