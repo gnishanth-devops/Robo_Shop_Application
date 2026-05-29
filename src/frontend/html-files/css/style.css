@@ -638,22 +638,27 @@ div.splash {
 
 .form-group {
 
-    display: flex;
+    display: flex !important;
 
-    flex-direction: column;
+    flex-direction: column !important;
 
-    gap: 8px;
+    align-items: flex-start;
 
 }
 
 .form-group label {
+
+    display: block !important;
+
+    width: 100%;
+
+    margin-bottom: 8px;
 
     color: #06b6d4;
 
     font-weight: 600;
 
 }
-
 .shipping-form select,
 .shipping-form input {
 
