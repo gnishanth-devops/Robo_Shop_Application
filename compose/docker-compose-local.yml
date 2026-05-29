@@ -92,9 +92,9 @@ services:
       MYSQL_ROOT_PASSWORD: RoboShop@1
     volumes:
       - mysql-data:/var/lib/mysql
-      - ../src/shiping/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
-      - ../src/shiping/db/app-user.sql:/docker-entrypoint-initdb.d/02-app-user.sql
-      - ../src/shiping/db/master-data.sql:/docker-entrypoint-initdb.d/03-master-data.sql
+      - ../src/shipping/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ../src/shipping/db/app-user.sql:/docker-entrypoint-initdb.d/02-app-user.sql
+      - ../src/shipping/db/master-data.sql:/docker-entrypoint-initdb.d/03-master-data.sql
     networks:
       - roboshop
 
