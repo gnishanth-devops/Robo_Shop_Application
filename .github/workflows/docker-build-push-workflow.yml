@@ -35,10 +35,15 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ inputs.repo_name }}
+          images: docker.io/${{ inputs.repo_name }}
           tags:
             type=ref,event=pr,prefix=pr-
             type=raw,value=${{ inputs.service }}-latest,enable={{is_default_branch}}
+            
+      - name: Debug Metadata
+        run: |
+          echo "TAGS:"
+          echo '${{ steps.meta.outputs.tags }}'
 
       - name: Setup docker buildx
         uses: docker/setup-buildx-action@v4
