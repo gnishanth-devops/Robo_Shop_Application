@@ -3,6 +3,7 @@
 ## Screenshots
 The RoboShop application UI has been redesigned with an improved modern user experience.
 
+<img src="docs/images/home-page.png" width="800">
 See [Application Screenshots](docs/screenshots.md)
 
 # Running RoboShop Locally

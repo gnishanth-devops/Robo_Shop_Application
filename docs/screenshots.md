@@ -2,7 +2,7 @@
 
 ## Home Page
 
-![Home Page](home-page.png)
+![Home Page](images/home-page.png)
 
 The landing page displays featured robotics products, categories, and technology stack information.
 
@@ -10,7 +10,7 @@ The landing page displays featured robotics products, categories, and technology
 
 ## User Registration and Login
 
-![Login and Registration](docs/images/login-register.png)
+![Login and Registration](images/login-register.png)
 
 Users can create accounts and authenticate to access shopping features.
 
@@ -18,7 +18,7 @@ Users can create accounts and authenticate to access shopping features.
 
 ## Product Details
 
-![Product Details](docs/images/product-details.png)
+![Product Details](images/product-details.png)
 
 View robot specifications, pricing, ratings, inventory status, and add products to the cart.
 
@@ -26,7 +26,7 @@ View robot specifications, pricing, ratings, inventory status, and add products 
 
 ## Shopping Cart
 
-![Shopping Cart](docs/images/shopping-cart.png)
+![Shopping Cart](images/shopping-cart.png)
 
 Review selected products, update quantities, and proceed to checkout.
 
@@ -34,7 +34,7 @@ Review selected products, update quantities, and proceed to checkout.
 
 ## Shipping Calculator
 
-![Shipping Calculator](docs/images/shipping-calculator.png)
+![Shipping Calculator](images/shipping-calculator.png)
 
 Calculate shipping costs based on destination country and location.
 
@@ -42,7 +42,7 @@ Calculate shipping costs based on destination country and location.
 
 ## Shipping Estimate
 
-![Shipping Estimate](docs/images/shipping-estimate.png)
+![Shipping Estimate](images/shipping-estimate.png)
 
 Review shipping distance and cost before confirming delivery.
 
@@ -50,7 +50,7 @@ Review shipping distance and cost before confirming delivery.
 
 ## Order Review
 
-![Order Review](docs/images/order-review.png)
+![Order Review](images/order-review.png)
 
 Verify products, shipping charges, taxes, and total amount before payment.
 
@@ -58,6 +58,6 @@ Verify products, shipping charges, taxes, and total amount before payment.
 
 ## Order Confirmation
 
-![Order Confirmation](docs/images/order-confirmation.png)
+![Order Confirmation](images/order-confirmation.png)
 
 Successful order placement confirmation screen.
