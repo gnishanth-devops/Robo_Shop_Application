@@ -142,7 +142,6 @@ services:
     restart: unless-stopped
     networks:
       - roboshop
-
   # UI access to DB
   adminer:
     image: adminer:latest
