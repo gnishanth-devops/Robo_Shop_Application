@@ -326,3 +326,91 @@ SHOW DATABASES;
 USE cities;
 SHOW TABLES;
 ```
+
+# GitHub Actions Setup for RoboShop Docker Builds
+
+## Prerequisites
+
+* GitHub Repository
+* Docker Hub Account
+* Docker Hub Access Token
+* GitHub Actions enabled
+
+---
+
+## Step 1: Generate Docker Hub Access Token
+
+1. Login to Docker Hub.
+
+2. Navigate to:
+
+   Account Settings → Personal Access Tokens
+
+3. Click **Generate New Token**.
+
+4. Provide:
+
+   * Token Description: `github-actions`
+   * Access Permissions: `Read, Write, Delete`
+
+5. Copy and save the token securely.
+
+---
+
+## Step 2: Configure GitHub Secrets
+
+Navigate to:
+
+Settings → Secrets and variables → Actions → Secrets
+
+Create the following secrets:
+
+| Secret Name        | Value                    |
+| ------------------ | ------------------------ |
+| DOCKER_USERNAME | Your Docker Hub username |
+| DOCKER_PASSWORD    | Docker Hub access token  |
+
+
+## Step 3: Configure GitHub Variables
+
+Navigate to:
+
+Settings → Secrets and variables → Actions → Variables
+
+Create:
+
+| Variable Name | Value                  |
+| ------------- | ---------------------- |
+| REPO_NAME     | <replace with your repo (org/repo)> |
+
+---
+
+## Step 4: Docker Login in GitHub Actions
+
+```yaml
+- name: Login to Docker Hub
+  uses: docker/login-action@v3
+  with:
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_PASSWORD }}
+```
+
+---
+
+
+
+## GitHub Configuration Summary
+
+### Secrets
+
+| Name               |
+| ------------------ |
+| DOCKER_USERNAME |
+| DOCKER_PASSWORD  |
+
+### Variables
+
+| Name      | Value                  |
+| --------- | ---------------------- |
+| REPO_NAME | <replace with your repo (org/repo) |
+
