@@ -288,6 +288,5 @@ Create:
 | ------------- | ---------------------- |
 | REPO_NAME     | <replace with your docker repo (org/repo)> |
 
-example: gnishanth777/robo_shop_application
 ---
 
