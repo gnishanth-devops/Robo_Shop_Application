@@ -26,19 +26,31 @@ cd Robo_Shop_Application/compose
 ## Start Application
 
 ```bash
-docker compose up -d --build
+docker compose -f docker-compose-local.yml up -d --build
 ```
 
-Verify:
+Verify containers are running:
 
 ```bash
 docker ps
 ```
 
-Check logs:
+Check application logs:
 
 ```bash
-docker compose logs -f
+docker compose -f docker-compose-local.yml logs -f
+```
+
+Check logs for a specific service:
+
+```bash
+docker compose -f docker-compose-local.yml logs -f frontend
+```
+
+Stop the application:
+
+```bash
+docker compose -f docker-compose-local.yml down
 ```
 
 ## Access Application
