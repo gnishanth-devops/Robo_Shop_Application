@@ -148,7 +148,7 @@ services:
       - "8082:8080"
     depends_on:
       - mysql
-    network:
+    networks:
       - roboshop
 
   mongo-express:
@@ -160,14 +160,14 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb
     depends_on:
       - mongodb
-    network:
+    networks:
       - roboshop
   redisinsight:
     image: redis/redisinsight:latest
     container_name: redis-insight
     ports:
       - "5540:5540"
-    network:
+    networks:
       - roboshop
 
 volumes:
