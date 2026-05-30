@@ -3,7 +3,7 @@
 ## Screenshots
 The RoboShop application UI has been redesigned with an improved modern user experience.
 
-See [Application Screenshots](docs/screenshots.md)
+See [Application Screenshots](docs/images/screenshots.md)
 
 # Running RoboShop Locally
 
