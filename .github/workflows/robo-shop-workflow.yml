@@ -38,7 +38,7 @@ jobs:
     secrets: inherit
     with:
       compose_file: compose/docker-compose-integration-dev.yml
-      repo_name: ${{ vars.REPO_NAME }}
+      repo_name: gnishanth777/robo_shop_application
 
 
 
