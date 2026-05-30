@@ -20,16 +20,16 @@ permissions:
   packages: write
   contents: read
 
+concurrency:
+  group: docker-${{ inputs.service }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest
-    concurrency:
-      group: docker-${{ github.ref }}
-      cancel-in-progress: true
     steps:
       - name: checkout the code
         uses: actions/checkout@v6
-
       # docker metadata
       - name: Extract docker Metadata
         id: meta
