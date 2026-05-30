@@ -140,6 +140,36 @@ services:
     networks:
       - roboshop
 
+  # UI access to DB
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mysql
+    network:
+      - roboshop
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8083:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    depends_on:
+      - mongodb
+    network:
+      - roboshop
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    ports:
+      - "5540:5540"
+    network:
+      - roboshop
+
 volumes:
   mongo-data:
   mysql-data:
