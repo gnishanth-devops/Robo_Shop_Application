@@ -1,10 +1,14 @@
 # RoboShop Infrastructure Access & Deployment Guide
 
 ## Screenshots
-The RoboShop application UI has been redesigned with an improved modern user experience.
-See [Application Screenshots](docs/screenshots.md)
 
-<img src="docs/images/home-page.png" width="60%">
+The RoboShop application UI has been redesigned with an improved modern user experience.
+
+<p align="center">
+  <img src="docs/images/home-page.png" width="60%">
+</p>
+
+📷 See [Application Screenshots](docs/screenshots.md) for the complete user journey.
 
 # Running RoboShop Locally
 
