@@ -3,17 +3,119 @@
 //
 db = db.getSiblingDB('catalogue');
 db.products.insertMany([
-    {sku: 'Watson', name: 'Watson', description: 'Probably the smartest AI on the planet', price: 2001, instock: 2, categories: ['Artificial Intelligence']},
-    {sku: 'Ewooid', name: 'Ewooid', description: 'Fully sentient assistant', price: 200, instock: 0, categories: ['Artificial Intelligence']},
-    {sku: 'HPTD', name: 'High-Powered Travel Droid', description: 'Traveling to the far reaches of the Galaxy? You need this for protection. Comes in handy when you are lost in space', price: 1200, instock: 12, categories: ['Robot']},
-    {sku: 'UHJ', name: 'Ultimate Harvesting Juggernaut', description: 'Extraterrestrial vegetation harvester', price: 5000, instock: 10, categories: ['Robot']},
-    {sku: 'EPE', name: 'Extreme Probe Emulator', description: 'Versatile interface adapter for hacking into systems', price: 953, instock: 1, categories: ['Robot']},
-    {sku: 'EMM', name: 'Exceptional Medical Machine', description: 'Fully automatic surgery droid with exceptional bedside manner', price: 1024, instock: 1, categories: ['Robot']},
-    {sku: 'SHCE', name: 'Strategic Human Control Emulator', description: 'Diplomatic protocol assistant', price: 300, instock: 12, categories: ['Robot']},
-    {sku: 'RED', name: 'Responsive Enforcer Droid', description: 'Security detail, will gaurd anything', price: 700, instock: 5, categories: ['Robot']},
-    {sku: 'RMC', name: 'Robotic Mining Cyborg', description: 'Excellent tunneling capability to get those rare minerals', price: 42, instock: 48, categories: ['Robot']},
-    {sku: 'STAN-1', name: 'Stan', description: 'Observability guru', price: 67, instock: 1000, categories: ['Robot', 'Artificial Intelligence']},
-    {sku: 'CNA', name: 'Cybernated Neutralization Android', description: 'Is your spaceship a bit whiffy? This little fellow will bring a breath of fresh air', price: 1000, instock: 0, categories: ['Robot']}
+    // Industrial Robots
+
+{
+  sku: 'IRX-100',
+  name: 'Industrial RX-100',
+  description: 'Heavy-duty robotic arm for manufacturing automation',
+  price: 4500,
+  instock: 25,
+  categories: ['Industrial Robot']
+},
+{
+  sku: 'WELD-900',
+  name: 'WeldMaster 900',
+  description: 'Precision welding robot with AI-assisted calibration',
+  price: 7800,
+  instock: 12,
+  categories: ['Industrial Robot']
+},
+
+// Healthcare
+
+{
+  sku: 'MED-CARE',
+  name: 'MediCare Assistant',
+  description: 'Patient monitoring and healthcare support robot',
+  price: 3200,
+  instock: 18,
+  categories: ['Healthcare']
+},
+{
+  sku: 'SURG-X',
+  name: 'Surgical Precision X',
+  description: 'Advanced robotic surgical assistant',
+  price: 25000,
+  instock: 3,
+  categories: ['Healthcare']
+},
+
+// Home Robots
+
+{
+  sku: 'HOME-AI',
+  name: 'Home Companion AI',
+  description: 'Smart assistant for daily household activities',
+  price: 599,
+  instock: 50,
+  categories: ['Home Robot']
+},
+{
+  sku: 'CLEANBOT',
+  name: 'CleanBot Ultra',
+  description: 'Autonomous vacuum and floor cleaning robot',
+  price: 349,
+  instock: 80,
+  categories: ['Home Robot']
+},
+
+// Security
+
+{
+  sku: 'SEC-GUARD',
+  name: 'Security Guardian',
+  description: '24x7 autonomous security patrol robot',
+  price: 2200,
+  instock: 15,
+  categories: ['Security']
+},
+{
+  sku: 'DRONE-EYE',
+  name: 'Drone Eye',
+  description: 'Aerial surveillance and monitoring drone',
+  price: 1800,
+  instock: 20,
+  categories: ['Security']
+},
+
+// AI Systems
+
+{
+  sku: 'GPT-X1',
+  name: 'GPT-X1 Assistant',
+  description: 'Enterprise-grade conversational AI assistant',
+  price: 999,
+  instock: 100,
+  categories: ['Artificial Intelligence']
+},
+{
+  sku: 'VISION-PRO',
+  name: 'VisionPro AI',
+  description: 'Computer vision platform for object recognition',
+  price: 1500,
+  instock: 40,
+  categories: ['Artificial Intelligence']
+},
+
+// Logistics
+
+{
+  sku: 'WAREBOT',
+  name: 'Warehouse Bot',
+  description: 'Automated inventory transport robot',
+  price: 2800,
+  instock: 22,
+  categories: ['Logistics']
+},
+{
+  sku: 'SORTMAX',
+  name: 'SortMax AI',
+  description: 'High-speed package sorting robot',
+  price: 6200,
+  instock: 8,
+  categories: ['Logistics']
+}
 ]);
 
 // full text index for searching
