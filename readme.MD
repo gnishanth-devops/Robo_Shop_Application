@@ -1,27 +1,5 @@
 # RoboShop Infrastructure Access & Deployment Guide
 
-## Application URLs
-
-| Service             | URL / Port            | Username | Password    |
-| ------------------- | --------------------- | -------- | ----------- |
-| RoboShop Frontend   | http://<EC2-IP>:8080  | N/A      | N/A         |
-| RabbitMQ Management | http://<EC2-IP>:15672 | roboshop | roboshop123 |
-| Adminer (MySQL UI)  | http://<EC2-IP>:8082  | root     | RoboShop@1  |
-| Mongo Express       | http://<EC2-IP>:8083  | admin    | RoboShop@1  |
-| RedisInsight        | http://<EC2-IP>:5540  | N/A      | N/A         |
-
----
-
-# Backend Services
-
-| Service  | Container | Port  | Username | Password    |
-| -------- | --------- | ----- | -------- | ----------- |
-| MySQL    | mysql     | 3306  | root     | RoboShop@1  |
-| MongoDB  | mongodb   | 27017 | None     | None        |
-| Redis    | redis     | 6379  | None     | None        |
-| RabbitMQ | rabbitmq  | 5672  | roboshop | roboshop123 |
-
----
 
 # Running RoboShop Locally
 
@@ -30,14 +8,12 @@
 Install:
 
 * Docker Engine
-* Docker Compose Plugin
 * Git
 
 Verify:
 
 ```bash
 docker --version
-docker compose version
 ```
 
 ## Clone Repository
@@ -125,6 +101,28 @@ docker ps
 ```
 
 ---
+## Application URLs
+
+| Service             | URL / Port            | Username | Password    |
+| ------------------- | --------------------- | -------- | ----------- |
+| RoboShop Frontend   | http://<EC2-IP>:8080  | N/A      | N/A         |
+| RabbitMQ Management | http://<EC2-IP>:15672 | roboshop | roboshop123 |
+| Adminer (MySQL UI)  | http://<EC2-IP>:8082  | root     | RoboShop@1  |
+| Mongo Express       | http://<EC2-IP>:8083  | admin    | RoboShop@1  |
+| RedisInsight        | http://<EC2-IP>:5540  | N/A      | N/A         |
+
+---
+
+# Backend Services
+
+| Service  | Container | Port  | Username | Password    |
+| -------- | --------- | ----- | -------- | ----------- |
+| MySQL    | mysql     | 3306  | root     | RoboShop@1  |
+| MongoDB  | mongodb   | 27017 | None     | None        |
+| Redis    | redis     | 6379  | None     | None        |
+| RabbitMQ | rabbitmq  | 5672  | roboshop | roboshop123 |
+
+---
 
 # AWS Security Group Configuration
 
@@ -141,105 +139,8 @@ Allow the following inbound ports:
 
 ---
 
-# Access URLs (AWS)
+# RoboShop Infrastructure Admin Access Details
 
-Replace `<EC2-PUBLIC-IP>` with your server's public IP.
-
-| Service       | URL                          |
-| ------------- | ---------------------------- |
-| RoboShop      | http://<EC2-PUBLIC-IP>:8080  |
-| RabbitMQ      | http://<EC2-PUBLIC-IP>:15672 |
-| Adminer       | http://<EC2-PUBLIC-IP>:8082  |
-| Mongo Express | http://<EC2-PUBLIC-IP>:8083  |
-| RedisInsight  | http://<EC2-PUBLIC-IP>:5540  |
-
----
-
-# Common Commands
-
-## View Containers
-
-```bash
-docker ps
-```
-
-## View Logs
-
-```bash
-docker compose logs -f
-```
-
-## Restart Application
-
-```bash
-docker compose restart
-```
-
-## Stop Application
-
-```bash
-docker compose down
-```
-
-## Rebuild Application
-
-```bash
-docker compose down
-docker compose up -d --build
-```
-
----
-
-# Database Access
-
-## MySQL
-
-```bash
-docker exec -it mysql mysql -uroot -pRoboShop@1
-```
-
-## MongoDB
-
-```bash
-docker exec -it mongodb mongosh
-```
-
-## Redis
-
-```bash
-docker exec -it redis redis-cli
-```
-
-## RabbitMQ
-
-```bash
-docker exec -it rabbitmq rabbitmqctl status
-```
-
-# RoboShop Infrastructure Access Details
-
-## Application URLs
-
-| Service             | URL / Port            | Username | Password    |
-| ------------------- | --------------------- | -------- | ----------- |
-| RoboShop Frontend   | http://<EC2-IP>:8080  | N/A      | N/A         |
-| RabbitMQ Management | http://<EC2-IP>:15672 | roboshop | roboshop123 |
-| Adminer (MySQL UI)  | http://<EC2-IP>:8082  | root     | RoboShop@1  |
-| Mongo Express       | http://<EC2-IP>:8083  | admin    | RoboShop@1  |
-| RedisInsight        | http://<EC2-IP>:5540  | N/A      | N/A         |
-
----
-
-## Database Services
-
-| Service   | Container Name | Internal Port | External Port | Username | Password    |
-| --------- | -------------- | ------------- | ------------- | -------- | ----------- |
-| MySQL 8.0 | mysql          | 3306          | 3306          | root     | RoboShop@1  |
-| MongoDB 7 | mongodb        | 27017         | 27017         | None     | None        |
-| Redis     | redis          | 6379          | 6379          | None     | None        |
-| RabbitMQ  | rabbitmq       | 5672          | 5672          | roboshop | roboshop123 |
-
----
 
 ## RabbitMQ Details
 
@@ -291,41 +192,6 @@ docker exec -it rabbitmq rabbitmqctl status
 
 ---
 
-## Useful Commands
-
-### RabbitMQ
-
-```bash
-docker exec -it rabbitmq rabbitmqctl status
-docker exec -it rabbitmq rabbitmqctl list_exchanges
-docker exec -it rabbitmq rabbitmqctl list_queues
-```
-
-### Redis
-
-```bash
-docker exec -it redis redis-cli
-KEYS *
-DBSIZE
-```
-
-### MongoDB
-
-```bash
-docker exec -it mongodb mongosh
-show dbs
-use catalogue
-show collections
-```
-
-### MySQL
-
-```bash
-docker exec -it mysql mysql -uroot -pRoboShop@1
-SHOW DATABASES;
-USE cities;
-SHOW TABLES;
-```
 
 # GitHub Actions Setup for RoboShop Docker Builds
 
@@ -367,8 +233,8 @@ Create the following secrets:
 
 | Secret Name        | Value                    |
 | ------------------ | ------------------------ |
-| DOCKER_USERNAME | Your Docker Hub username |
-| DOCKER_PASSWORD    | Docker Hub access token  |
+| DOCKER_USERNAME    | < Your Docker Hub username > |
+| DOCKER_PASSWORD    | < Docker Hub access token >  |
 
 
 ## Step 3: Configure GitHub Variables
@@ -381,36 +247,8 @@ Create:
 
 | Variable Name | Value                  |
 | ------------- | ---------------------- |
-| REPO_NAME     | <replace with your repo (org/repo)> |
+| REPO_NAME     | <replace with your docker repo (org/repo)> |
 
+example: gnishanth777/robo_shop_application
 ---
-
-## Step 4: Docker Login in GitHub Actions
-
-```yaml
-- name: Login to Docker Hub
-  uses: docker/login-action@v3
-  with:
-    username: ${{ secrets.DOCKER_USERNAME }}
-    password: ${{ secrets.DOCKER_PASSWORD }}
-```
-
----
-
-
-
-## GitHub Configuration Summary
-
-### Secrets
-
-| Name               |
-| ------------------ |
-| DOCKER_USERNAME |
-| DOCKER_PASSWORD  |
-
-### Variables
-
-| Name      | Value                  |
-| --------- | ---------------------- |
-| REPO_NAME | <replace with your repo (org/repo) |
 
