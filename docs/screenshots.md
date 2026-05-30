@@ -2,7 +2,7 @@
 
 ## Home Page
 
-![Home Page](docs/images/home-page.png)
+![Home Page](home-page.png)
 
 The landing page displays featured robotics products, categories, and technology stack information.
 
