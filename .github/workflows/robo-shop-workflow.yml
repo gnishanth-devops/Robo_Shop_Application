@@ -9,20 +9,8 @@ concurrency:
   group: pr-validation-${{ github.ref}}
   cancel-in-progress: true
 
-env:
-  REPO_NAME: gnishanth777/robo_shop_application
-
 jobs:
-  checkout:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout the code
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
   build-service:
-    needs: checkout
     strategy:
       fail-fast: false
       matrix:
@@ -36,17 +24,17 @@ jobs:
     uses: ./.github/workflows/docker-build-push-workflow.yml
     secrets: inherit
     with:
-      repo_name: ${{ env.REPO_NAME }}
+      repo_name: ${{ vars.REPO_NAME }}
       service: ${{ matrix.service }}
       service_path: ${{ matrix.service }}
 
   docker-compose:
     needs: build-service
-    uses: ./github/workflows/docker-compose-intregration.yml
+    uses: ./.github/workflows/docker-compose-integration.yml
     secrets: inherit
     with:
       compose_file: compose/docker-compose-integration-dev.yml
-      repo_name: ${{ env.REPO_NAME }}
+      repo_name: ${{ vars.REPO_NAME }}
 
 
 
