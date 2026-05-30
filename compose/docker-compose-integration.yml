@@ -1,0 +1,175 @@
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  user-service:
+    image: ${USER_IMAGE}
+    container_name: user-service
+    environment:
+      USER_SERVER_PORT: 8080
+      REDIS_URL: redis://redis:6379
+      MONGO_URL: mongodb://mongodb:27017/users
+      NODE_ENV: production
+    depends_on:
+      - redis
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  catalogue-service:
+    image: ${USER_IMAGE}
+    container_name: catalogue-service
+    environment:
+      CATALOGUE_SERVER_PORT: 8080
+      MONGO: "true"
+      MONGO_URL: mongodb://mongodb:27017/catalogue
+    depends_on:
+      - mongodb
+    networks:
+      - roboshop
+
+  cart-service:
+    image: ${CART_IMAGE}
+    environment:
+      REDIS_HOST: redis
+      CATALOGUE_HOST: catalogue-service
+      CATALOGUE_PORT: 8080
+    depends_on:
+      - redis
+      - catalogue-service
+    networks:
+      - roboshop
+
+  shipping-service:
+    image: ${SHIPPING_IMAGE}
+    container_name: shipping-service
+    environment:
+      CART_ENDPOINT: cart-service:8080
+      DB_HOST: mysql
+    depends_on:
+      - cart-service
+      - mysql
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  payment-service:
+    image: ${PAYMENT_IMAGE}
+    environment:
+      CART_HOST: cart-service
+      CART_PORT: 8080
+      USER_HOST: user-service
+      USER_PORT: 8080
+      AMQP_HOST: rabbitmq
+      AMQP_USER: roboshop
+      AMQP_PASS: roboshop123
+    depends_on:
+      - cart-service
+      - user-service
+      - rabbitmq
+    networks:
+      - roboshop
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: RoboShop@1
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../src/shipping/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ../src/shipping/db/app-user.sql:/docker-entrypoint-initdb.d/02-app-user.sql
+      - ../src/shipping/db/master-data.sql:/docker-entrypoint-initdb.d/03-master-data.sql
+    networks:
+      - roboshop
+
+  redis:
+    image: redis:8.2.6-alpine
+    container_name: redis
+    command:
+      [
+        "redis-server",
+        "--bind",
+        "0.0.0.0",
+        "--protected-mode",
+        "no"
+      ]
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  mongodb:
+    image: mongo:7.0.21
+    container_name: mongodb
+    command: ["mongod", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ../src/catalogue/db:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    networks:
+      - roboshop
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+    restart: unless-stopped
+    networks:
+      - roboshop
+  # UI access to DB
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mysql
+    networks:
+      - roboshop
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    ports:
+      - "8083:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: RoboShop@1
+    depends_on:
+      - mongodb
+    networks:
+      - roboshop
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    ports:
+      - "5540:5540"
+    networks:
+      - roboshop
+
+volumes:
+  mongo-data:
+  mysql-data:
+
+networks:
+  roboshop:
+    driver: bridge

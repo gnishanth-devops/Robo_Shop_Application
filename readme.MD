@@ -139,15 +139,6 @@ Allow the following inbound ports:
 | 5540  | TCP      | RedisInsight  |
 | 15672 | TCP      | RabbitMQ UI   |
 
-Optional Database Access:
-
-| Port  | Protocol | Purpose       |
-| ----- | -------- | ------------- |
-| 3306  | TCP      | MySQL         |
-| 27017 | TCP      | MongoDB       |
-| 6379  | TCP      | Redis         |
-| 5672  | TCP      | RabbitMQ AMQP |
-
 ---
 
 # Access URLs (AWS)
